@@ -24,7 +24,7 @@ public class Encherisseur {
 		System.out.println("Agent " + id + " is executed");
 		
 		//set the socket server for incoming messages
-                
+
 		//incoming = new Incoming(args[1]);
 		//incoming.start();
 			
