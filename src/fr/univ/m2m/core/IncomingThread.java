@@ -78,6 +78,7 @@ public class IncomingThread extends Thread {
                         } catch (Exception e) {
 
                         }
+                        
                         out.println("EndAuction");
                     } else {
                         obj.currentAuction += 50;

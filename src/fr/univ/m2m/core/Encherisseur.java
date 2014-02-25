@@ -24,8 +24,9 @@ public class Encherisseur {
 		System.out.println("Agent " + id + " is executed");
 		
 		//set the socket server for incoming messages
-		incoming = new Incoming(args[1]);
-		incoming.start();
+                
+		//incoming = new Incoming(args[1]);
+		//incoming.start();
 			
 		//if the agent id is Cartman, it initiates the protocol
 		//with Kenny
