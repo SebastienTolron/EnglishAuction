@@ -13,13 +13,15 @@ public class Incoming extends Thread {
 	
 	//the server socket port
 	int port;
+        ObjectAuction objet;
 	
 	/**
 	 * Constructor sets the port for the server socket
 	 * @param port the server socket port
 	 */
-	public Incoming(String port) {
+	public Incoming(String port,ObjectAuction obj) {
 		
+                this.objet = obj;
 		this.port = Integer.parseInt(port);
 		
 	} //constructor
@@ -36,7 +38,7 @@ public class Incoming extends Thread {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
         	
             while (listening) 
-                new IncomingThread(serverSocket.accept()).start();
+                new IncomingThread(serverSocket.accept(),objet).start();
             
         } //try
         catch (IOException e) {
