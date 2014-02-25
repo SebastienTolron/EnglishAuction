@@ -1,4 +1,5 @@
-package fr.univ.savoie.multiagent.core;
+package fr.univ.m2m.core;
+
 
 public class Agent {
 

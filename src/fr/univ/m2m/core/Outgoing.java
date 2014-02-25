@@ -1,4 +1,5 @@
-package fr.univ.savoie.multiagent.core;
+package fr.univ.m2m.core;
+
 
 import java.io.BufferedReader;
 import java.io.IOException;
