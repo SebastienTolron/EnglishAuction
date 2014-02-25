@@ -54,9 +54,13 @@ public class IncomingThread extends Thread {
                 System.out.println("From client: " + inputLine);
 
                 //the protocol, here the Contract Net
-                if (inputLine.equals("cfp")) {
+                if (inputLine.equals("Join")) {
                 	
-                	out.println("propose");
+                	out.println("StartAuction");
+                        
+                        out.println("NameObject: TV");
+                        
+                        out.println("PriceObject : 128");
                 	
                 } //if
                 
