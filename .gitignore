@@ -3,3 +3,10 @@
 nbproject/
 build.xml
 manifest.mf
+.classpath
+.project
+.settings/org.eclipse.jdt.core.prefs
+bin/
+/nbproject/private/
+/dist/
+.DS_Store
