@@ -70,12 +70,6 @@ public class Outgoing extends Thread {
                     int objectPrice = Integer.parseInt((String) fromOtherAgent.subSequence(4, fromOtherAgent.length()));
                     if(objectPrice<=encherisseur.priceMax){
                         out.println("Take");
-                        try {
-                            Thread.sleep(12000);
-                        } catch (InterruptedException ex) {
-                            Logger.getLogger(Outgoing.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        out.println("Take");
                     }
                 }
                 
