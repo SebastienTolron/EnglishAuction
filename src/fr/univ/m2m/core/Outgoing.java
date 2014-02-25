@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The Outgoing class allows to send messages to another agent
@@ -17,17 +19,19 @@ public class Outgoing extends Thread {
 	//it corresponds to the server socket to contact
 	private String host;
 	private String port;
+        private Object obj;
+        private Encherisseur encherisseur;
 	
 	/**
 	 * Constructor that sets the port
 	 * @param host the host of the server socket
 	 * @param port the port of the server socket
 	 */
-	public Outgoing(String host, String port) {
+	public Outgoing(String host, String port, Encherisseur encherisseur) {
 		
 		this.host = host;
 		this.port = port;
-		
+                this.encherisseur = encherisseur;
 	} //constructor
 	
 	/**
@@ -50,27 +54,51 @@ public class Outgoing extends Thread {
  
             while ((fromOtherAgent = in.readLine()) != null) {
                 System.out.println("In: " + fromOtherAgent);
+                if(fromOtherAgent.contains("NameObject")){
+                    String objectName = (String) fromOtherAgent.subSequence(11, fromOtherAgent.length());
+                    if(objectName.equals("TV"))
+                        this.encherisseur.priceMax = 2000;
+                    else if(objectName.equals("Voiture")) {
+                        this.encherisseur.priceMax = 30000;
+                     }
+                    else{
+                        this.encherisseur.priceMax = 300;
+                    }
+                }
+                
+                if(fromOtherAgent.contains("Bid")){
+                    int objectPrice = Integer.parseInt((String) fromOtherAgent.subSequence(4, fromOtherAgent.length()));
+                    if(objectPrice<=encherisseur.priceMax){
+                        out.println("Take");
+                        try {
+                            Thread.sleep(12000);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Outgoing.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        out.println("Take");
+                    }
+                }
                 
                 if (fromOtherAgent.equals("Start")) {
 
                 	//start the protocol, send a cfp to the other agent
-                	System.out.println("Out: cfp");
-                	out.println("cfp");
+                	System.out.println("Join");
+                	out.println("Join");
                 	
                 } //if
                 
-                if (fromOtherAgent.equals("propose")) {
+                if (fromOtherAgent.equals("StartAuction")) {
                 	
                 	//answer by accept-proposal or reject-proposal
-                	System.out.println("Out: accept-proposal");
-                	out.println("accept-proposal");
+                	System.out.println("Out: price-object");
+                	// out.println("accept-proposal");
                 	
                 } //if
                 
-                if (fromOtherAgent.equals("inform-done")) {
+                if (fromOtherAgent.equals("EndAuction")) {
                 	
                 	//the task is done and we can inform the user
-                	System.out.println("Task done");
+                	System.out.println("Enchere Termine. Vous avez gagne l'enchere!");
                 	break;
                 	
                 } //if
